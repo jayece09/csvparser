@@ -1,0 +1,31 @@
+To execute the program:
+python input.py
+
+It produces a json string by default. If you want a csv file as output, write
+a python script:
+from input import PrepareInput
+obj = PrepareInput()
+obj.output(format='csv')
+
+
+Configuration file examples:
+headers.ini (The header sequence in the input.csv file):
+Company
+Value1
+Model
+Value2
+
+normalizations.ini:
+Value1=*100
+Value2=/1000
+
+translations.ini:
+modle1=model1
+modle2=model2
+
+output_schema.ini (The desired schema):
+Company
+Model
+Value1
+Value2
+
