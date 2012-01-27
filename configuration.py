@@ -36,22 +36,23 @@ class Configuration:
             conf = []
             for param in data:
                 param = param.strip()
-                tmp = param.split('=')
-                # The header to be operated on
-                header = tmp[0]
-                # The operation to be performed
-                operation = tmp[1]
-                
-                # Currently only a single operation is supported, will change in the future
-                if operation[0] == '*':
-                    function = lambda x: x * float(operation[1:])
-                if operation[0] == '/':
-                    function = lambda x: x / float(operation[1:])
-                
-                conf.append({
-                    "header": header,
-                    "function": function,
-                })
+                if param:
+                    tmp = param.split('=')
+                    # The header to be operated on
+                    header = tmp[0]
+                    # The operation to be performed
+                    operation = tmp[1]
+                    
+                    # Currently only a single operation is supported, will change in the future
+                    if operation[0] == '*':
+                        function = lambda x: x * float(operation[1:])
+                    if operation[0] == '/':
+                        function = lambda x: x / float(operation[1:])
+                    
+                    conf.append({
+                        "header": header,
+                        "function": function,
+                    })
             self.normalizations = conf
         
         # Sets the translation parameters
@@ -70,7 +71,8 @@ class Configuration:
             table = {}
             for trans in data:
                 trans = trans.strip()
-                table[trans.split('=')[0]] = trans.split('=')[1]
+                if trans:
+                    table[trans.split('=')[0]] = trans.split('=')[1]
             self.translations = table
 
     def format(self, values=()):
